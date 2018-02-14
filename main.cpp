@@ -28,6 +28,10 @@ int main(int argc, char** argv) {
     mytail *v = new mytail();
     v->debug(false);
     
+    cout << " ================= " << endl;
+    cout << "|      MYTAIL     |" << endl;
+    cout << " ================= " << endl << endl;
+
     //Introducimos 3 usuario
     cout << "Introducimos Rámon, Yezer, Rayco. Mostramos resultado push" << endl;
     v->push(a);
