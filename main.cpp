@@ -27,17 +27,41 @@ int main(int argc, char** argv) {
     
     mytail *v = new mytail();
     v->debug(false);
+    
+    //Introducimos 3 usuario
+    cout << "Introducimos Rámon, Yezer, Rayco. Mostramos resultado push" << endl;
     v->push(a);
     v->push(b);
     v->push(c);
-    //v->show();
-    NODE aux = v->pop();
+    v->show();
+    
+    //Extraemos el primero que por ser FIFO será Rayco
+    cout << "Extraemos Ramón. Mostramos resultado pop y el último estado de la pila" << endl;
+    NODE u = v->pop();
+    cout << u.mynode.cod << endl;
+    cout << u.mynode.name << endl;
+    cout << u.mynode.surname << endl;
+    v->show();
+
+    //Sacamos en exceso usurios hasta vaciarla y mostramos
+    v->pop();
     v->pop();
     v->pop();
     v->pop();
     v->pop();
     v->show();
+    
+    //Introducimos 1 usuario
+    cout << "Introducimos Ana, mostramos el contenido númerico y resultado de la pila" << endl;
+    v->push(d);
+    cout << "Count: " << v->count() << endl;
+    v->show();
+    
+    //Vaciamos la pila con clear
+    cout << "Vaciamos la pila con clear y verificamos tamaño con count()" << endl;
     v->clear();
+    cout << "Count: " << v->count() << endl;
+    
     delete v;
     return 0;
 }
