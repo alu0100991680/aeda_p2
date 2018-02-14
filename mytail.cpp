@@ -30,7 +30,7 @@ NODE * mytail::find(int at){
 }
 
 NODE& mytail::get(int i){
-    this->dmsg("F:GET->" + std::to_string(i));
+    this->dmsg("F:GET->" + to_string(i));
     NODE *d = this->find(i);
     return *d;
 }
@@ -48,7 +48,7 @@ void mytail::show() {
     cout << "--------" << endl;
     for (int i=0; i<this->length; i++){
         NODE *current_ = this->find(i);
-        this->dmsg("F:SHOW:Objecto->" + std::to_string(i));
+        this->dmsg("F:SHOW:Objecto->" + to_string(i));
         cout << "Next->" << current_->next << endl;
         cout << current_->mynode.cod << endl;
         cout << current_->mynode.name << endl;
@@ -85,7 +85,7 @@ void mytail::push(TDATO &d) {
 }
 
 void mytail::insert(TDATO &d, int at){
-    this->dmsg("F:INSERT->" + std::to_string(at));
+    this->dmsg("F:INSERT->" + to_string(at));
     if((0<=at)&&(at<=this->length)){
         NODE *m = new NODE();
         m->mynode.cod = d.cod;
@@ -112,7 +112,7 @@ void mytail::insert(TDATO &d, int at){
 }
 
 void mytail::removeat(int at){
-    this->dmsg("F:REMOVEAT->" + std::to_string(at));
+    this->dmsg("F:REMOVEAT->" + to_string(at));
     if((0<=at)&&(at<=this->length)){
         NODE *c = this->find(at);
         if(0<at){
@@ -139,7 +139,7 @@ void mytail::debug(bool is_active){
     this->debug_flag = is_active;
 }
 
-void mytail::dmsg(std::string message){
+void mytail::dmsg(string message){
     if (this->debug_flag==true){
         cout << message << endl;
     }
