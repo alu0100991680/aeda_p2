@@ -35,17 +35,17 @@ public:
     virtual ~mytail();
     //Práctica
     void show();
-    void add(TDATO &d);
-    void remove();
-    void removeat(int at);
+    void push(TDATO &d);
+    NODE& pop();
     void clear();
-    NODE& get(int i);
-    void insert(TDATO &d, int at);
     int count();
     //Aux
     void debug(bool is_active);
     void dmsg(std::string message);
 private:
+    void removeat(int at);
+    NODE& get(int i);
+    void insert(TDATO &d, int at);
     int length = 0;
     bool debug_flag = true;
     NODE* head_reference;

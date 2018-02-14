@@ -27,15 +27,17 @@ int main(int argc, char** argv) {
     
     mytail *v = new mytail();
     v->debug(false);
-    v->add(a);
-    v->add(b);
-    v->add(c);
-    v->insert(d, 3);
+    v->push(a);
+    v->push(b);
+    v->push(c);
     //v->show();
-    v->removeat(2);
+    NODE aux = v->pop();
+    v->pop();
+    v->pop();
+    v->pop();
+    v->pop();
     v->show();
     v->clear();
-    
     delete v;
     return 0;
 }

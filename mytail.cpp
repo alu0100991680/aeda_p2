@@ -29,53 +29,6 @@ NODE * mytail::find(int at){
     return n;
 }
 
-void mytail::add(TDATO &d) {
-    this->dmsg("F:ADD");
-
-    NODE *n = new NODE();
-    if (0<this->length){
-        n->mynode.cod = d.cod;
-        n->mynode.name = d.name;
-        n->mynode.surname = d.surname;
-
-        NODE *d = this->find(this->length-1);
-        
-        d->next = n;
-        
-    }else{
-        //first
-        n->mynode.cod = d.cod;
-        n->mynode.name = d.name;
-        n->mynode.surname = d.surname;
-        n->next = nullptr;
-        
-        // Puntero head
-        this->head_reference = n;
-    }
-    
-    //Ampliamos el indicador de contenido
-    this->length++;
-
-}
-
-void mytail::remove() {
-    this->dmsg("F:REMOVE");
-    if (0<this->length){
-        //Creamos un vector y puntero asociado para volcar la nueva información
-        //this->resize(-1);
-            //Añadimos el nuevo dato a la cola
-
-        //Ampliamos el indicador de contenido
-        if(1<this->length){
-            NODE *d = this->find(this->length-1);
-            delete d->next;
-            this->length--;
-        }else{
-            delete this->head_reference;
-        }
-    }
-}
-
 NODE& mytail::get(int i){
     this->dmsg("F:GET->" + std::to_string(i));
     NODE *d = this->find(i);
@@ -106,9 +59,28 @@ void mytail::clear(){
     this->dmsg("F:CLEAR");
     int fullcontent = this->length;
     for (int i=0;i<fullcontent;i++){
-        this->remove();
+        this->removeat(0);
     }
     this->length = 0;
+}
+
+void mytail::push(TDATO &d) {
+    this->dmsg("F:ADD");
+    this->insert(d, 0);
+}
+
+ NODE& mytail::pop() {
+    this->dmsg("F:REMOVE");
+    NODE *c_aux = nullptr;
+    if(0<this->length){
+        NODE *aux = this->find(this->length-1);
+        c_aux = new NODE(); // Hacemos una copia antes de borrarlo
+        c_aux->mynode.cod = aux->mynode.cod;
+        c_aux->mynode.name = aux->mynode.name;
+        c_aux->mynode.surname = aux->mynode.surname;
+        this->removeat(this->length-1);
+    }
+    return *c_aux;
 }
 
 void mytail::insert(TDATO &d, int at){
@@ -118,9 +90,7 @@ void mytail::insert(TDATO &d, int at){
         m->mynode.cod = d.cod;
         m->mynode.name = d.name;
         m->mynode.surname = d.surname; 
-        if (at==0){
-            this->head_reference = m;
-        }
+
         
         if (at<this->length){
             NODE *n = this->find(at);
@@ -131,6 +101,10 @@ void mytail::insert(TDATO &d, int at){
         if (0<at){
             NODE *p = this->find(at-1);
             p->next = m;
+        }
+        
+        if (at==0){
+            this->head_reference = m;
         }
         
         this->length++;
