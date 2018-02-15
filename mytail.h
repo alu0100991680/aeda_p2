@@ -1,16 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   mytail.h
- * Author: noc
- *
- * Created on 13 de febrero de 2018, 18:28
- */
-
 #ifndef MYTAIL_H
 #define MYTAIL_H
 
@@ -20,36 +7,33 @@ struct TDATO{
     std::string surname;
 };
 
-class NODE{
+class TAILNODE{
 public:
   TDATO mynode;
-  NODE *next;
+  TAILNODE *next;
 private:
 };	
 
 class mytail {
 public:
-    //Estandar
     mytail();
     mytail(const mytail& orig);
     virtual ~mytail();
-    //Práctica
-    void show();
-    void push(TDATO &d);
-    NODE& pop();
-    void clear();
     int count();
-    //Aux
+    void show();
+    void clear();
+    TAILNODE& pop();
+    void push(TDATO &d);
     void debug(bool is_active);
-    void dmsg(std::string message);
 private:
-    void removeat(int at);
-    NODE& get(int i);
-    void insert(TDATO &d, int at);
     int length = 0;
-    bool debug_flag = true;
-    NODE* head_reference;
-    NODE* find(int i);   
+    bool debug_flag = false;
+    TAILNODE* head_reference;
+    TAILNODE* find(int i);   
+    void removeat(int at);
+    TAILNODE& get(int i);
+    void insert(TDATO &d, int at);
+    void dmsg(std::string message);
 };
 
 #endif /* MYTAIL_H */

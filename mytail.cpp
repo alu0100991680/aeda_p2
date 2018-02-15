@@ -21,17 +21,17 @@ mytail::~mytail() {
 //Métodos práctica
 //================
 
-NODE * mytail::find(int at){
-    NODE *n = this->head_reference;
+TAILNODE * mytail::find(int at){
+    TAILNODE *n = this->head_reference;
     for(int i=0;i<at;i++){
         n = n->next;
     }
     return n;
 }
 
-NODE& mytail::get(int i){
+TAILNODE& mytail::get(int i){
     this->dmsg("F:GET->" + to_string(i));
-    NODE *d = this->find(i);
+    TAILNODE *d = this->find(i);
     return *d;
 }
 
@@ -47,7 +47,7 @@ void mytail::show() {
     
     cout << "--------" << endl;
     for (int i=0; i<this->length; i++){
-        NODE *current_ = this->find(i);
+        TAILNODE *current_ = this->find(i);
         this->dmsg("F:SHOW:Objecto->" + to_string(i));
         cout << "Next->" << current_->next << endl;
         cout << current_->mynode.cod << endl;
@@ -70,12 +70,12 @@ void mytail::push(TDATO &d) {
     this->insert(d, 0);
 }
 
- NODE& mytail::pop() {
+ TAILNODE& mytail::pop() {
     this->dmsg("F:REMOVE");
-    NODE *c_aux = nullptr;
+    TAILNODE *c_aux = nullptr;
     if(0<this->length){
-        NODE *aux = this->find(this->length-1);
-        c_aux = new NODE(); // Hacemos una copia antes de borrarlo
+        TAILNODE *aux = this->find(this->length-1);
+        c_aux = new TAILNODE(); // Hacemos una copia antes de borrarlo
         c_aux->mynode.cod = aux->mynode.cod;
         c_aux->mynode.name = aux->mynode.name;
         c_aux->mynode.surname = aux->mynode.surname;
@@ -87,19 +87,19 @@ void mytail::push(TDATO &d) {
 void mytail::insert(TDATO &d, int at){
     this->dmsg("F:INSERT->" + to_string(at));
     if((0<=at)&&(at<=this->length)){
-        NODE *m = new NODE();
+        TAILNODE *m = new TAILNODE();
         m->mynode.cod = d.cod;
         m->mynode.name = d.name;
         m->mynode.surname = d.surname; 
 
         if (at<this->length){
-            NODE *n = this->find(at);
+            TAILNODE *n = this->find(at);
             m->next = n; 
 
         }
         
         if (0<at){
-            NODE *p = this->find(at-1);
+            TAILNODE *p = this->find(at-1);
             p->next = m;
         }
         
@@ -114,10 +114,10 @@ void mytail::insert(TDATO &d, int at){
 void mytail::removeat(int at){
     this->dmsg("F:REMOVEAT->" + to_string(at));
     if((0<=at)&&(at<=this->length)){
-        NODE *c = this->find(at);
+        TAILNODE *c = this->find(at);
         if(0<at){
-            NODE *p = this->find(at-1);
-            NODE *n = nullptr;
+            TAILNODE *p = this->find(at-1);
+            TAILNODE *n = nullptr;
             if (at+1<this->length){        
                 n= this->find(at+1);
             }

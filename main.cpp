@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
     
     //Extraemos el primero que por ser FIFO será Rayco
     cout << "Extraemos Ramón. Mostramos resultado pop y el último estado de la pila" << endl;
-    NODE u = v->pop();
+    TAILNODE u = v->pop();
     cout << u.mynode.cod << endl;
     cout << u.mynode.name << endl;
     cout << u.mynode.surname << endl;
